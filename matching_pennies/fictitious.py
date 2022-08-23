@@ -13,9 +13,9 @@ for episode in range(max_episode):
     if episode == 0:
         pass
     else:
-        random_index = random.choice(range(math.ceil(0.5 * len(os.listdir("trained/fictitious_recent_60/b"))),
+        random_index = random.choice(range(math.ceil(0.4 * len(os.listdir("trained/fictitious_recent_60/b"))),
                                            len(os.listdir("trained/fictitious_recent_60/b")) + 1))
-        agent_b.load("trained/fictitious_recent_100/b/PPO_train_episode_{}.pth".format(random_index))
+        agent_b.load("trained/fictitious_recent_60/b/PPO_train_episode_{}.pth".format(random_index))
 
     action_a, action_a_log_prob = agent_a.select_action()
     action_b, action_b_log_prob = agent_b.select_action()
@@ -26,8 +26,8 @@ for episode in range(max_episode):
     agent_b.buffer.push(action_b, action_b_log_prob, reward_b)
 
     agent_a.update()
-    agent_a.save("trained/fictitious_recent_100/a/PPO_train_episode_" + "{}.pth".format(episode + 1))
-    agent_a.save("trained/fictitious_recent_100/b/PPO_train_episode_" + "{}.pth".format(episode + 1))
+    agent_a.save("trained/fictitious_recent_60/a/PPO_train_episode_" + "{}.pth".format(episode + 1))
+    agent_a.save("trained/fictitious_recent_60/b/PPO_train_episode_" + "{}.pth".format(episode + 1))
 
     print("Episode: {}".format(episode + 1), "\n",
           "A choose action '{}'".format(['head', 'tail'][action_a]), "\n",
